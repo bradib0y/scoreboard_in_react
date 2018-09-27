@@ -36,24 +36,54 @@ function Counter(props) {
 
 }
 
-function App(){
+function App(props){
     return (     
         <div className="scoreboard">
-            <Header title="Scoreboard" totalPlayers={987}/> 
-            {/* List of players: */}    
-            <Player name="Balazs" score={99}/>
-            <Player name="Aasd" score={84}/>
-            <Player name="Yyxc" score={54}/>
-            <Player name="Qertz" score={64}/>
-            <Player name="Hgfsda" score={87}/>
+            <Header title="Scoreboard" totalPlayers={props.initialPlayers.length}/> 
+            {/* List of players: */}  
+            {
+                props.initialPlayers.map(
+                    (player) => {
+                        return (
+                            <Player 
+                                name={player.name} 
+                                score={player.score} 
+                                key={player.id.toString()}
+                            />
+                        );
+                    }
+                )
+            }
+          
         </div>           
     );
 }
 
+const players =   [{
+    id: 1,
+    name: "Guil",
+    score: 50
+  },
+  {
+    id: 2,
+    name: "Treasure",
+    score: 85
+  },
+  {
+    id: 3,
+    name: "Ashley",
+    score: 95
+  },
+  {
+    id: 4,
+    name: "James",
+    score: 80
+  }];
+
 // ReactDOM provides render function to create a DOM element from the React element
 setTimeout(()=>{
 ReactDOM.render(
-    <App />,
+    <App initialPlayers={players} />,
     document.getElementById("root")
 )},
 335);
